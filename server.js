@@ -1,15 +1,14 @@
 require("dotenv").config();
 
-const express = require("express");
-const mongoose = require("mongoose");
+const express = require('express')
+const mongoose = require('mongoose')
 const cors = require("cors");
-const userRoutes = require("./routes/user");
+const userRoutes = require('./routes/user')
+const employeeRoutes = require('./routes/employee')
 
 // express app
-const app = express();
-
+const app = express()
 app.use(cors());
-
 // middleware
 app.use(express.json({ limit: "5mb" }));
 
@@ -19,7 +18,8 @@ app.use((req, res, next) => {
 });
 
 // routes
-app.use("/api/user", userRoutes);
+app.use('/api/user', userRoutes)
+app.use('/api/employee', employeeRoutes)
 
 // connect to db
 mongoose
