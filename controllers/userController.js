@@ -62,26 +62,21 @@ const getUserdetails = async (req, res) => {
 const updateUserdetails = async (req, res) => {
   const { id } = req.params;
 
-  await User.findOneAndUpdate(
-    { _id: id },
-    {
-      ...req.body,
-    }
-  );
+  try {
+    const user = await User.findOneAndUpdate(
+      { _id: id },
+      {
+        ...req.body,
+      },
+      {
+        new: true,
+      }
+    );
 
-  const user = await User.findOne({ _id: id });
-
-  if (!user) {
-    return res.status(400).json({ error: "No such user" });
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
-
-  const firstname = user.firstname;
-  const lastname = user.lastname;
-  const mobile = user.mobile;
-  const address = user.address;
-  const avatar = user.avatar;
-
-  res.status(200).json({ id, firstname, lastname, mobile, address, avatar });
 };
 
 // delete user

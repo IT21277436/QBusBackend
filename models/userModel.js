@@ -23,6 +23,26 @@ const userSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    firstname: {
+      type: String,
+      default: null,
+      required: false,
+    },
+    lastname: {
+      type: String,
+      default: null,
+      required: false,
+    },
+    gender: {
+      type: String,
+      default: null,
+      required: false,
+    },
+    NIC: {
+      type: String,
+      default: null,
+      required: false,
+    },
   },
   { timestamps: true }
 );
