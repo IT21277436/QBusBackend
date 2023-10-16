@@ -1,7 +1,10 @@
 const Employee = require("../models/employeeModel");
 const mongoose = require("mongoose");
 
+<<<<<<< Updated upstream
 //get all Employees
+=======
+>>>>>>> Stashed changes
 const getAllEmployees = async (req, res) => {
     const employees = await Employee.find({}).sort({ createdAt: -1 });
 
@@ -12,7 +15,6 @@ const getAllEmployees = async (req, res) => {
     res.status(200).json(employees);
 };
 
-//get a single employee
 const getEmployeeDetails = async (req, res) => {
     const { id } = req.params;
 
@@ -29,7 +31,7 @@ const getEmployeeDetails = async (req, res) => {
     res.status(200).json(employee);
 }
 
-//create new employee
+
 const createEmployee = async ( req, res) =>{
     const {
         employeeId,
@@ -39,7 +41,12 @@ const createEmployee = async ( req, res) =>{
         category,
         region,
     } = req.body;
+<<<<<<< Updated upstream
     //add emp to db
+=======
+    
+
+>>>>>>> Stashed changes
     try {
         const employee = await Employee.create({
             employeeId,
@@ -55,7 +62,7 @@ const createEmployee = async ( req, res) =>{
   }
 };
 
-//delete a Employee
+
 const deleteEmployee = async (req, res) =>{
     const { id } = req.params;
    
@@ -78,6 +85,7 @@ const updateEmployeeDetails = async (req, res) => {
     if (!id || !mongoose.Types.ObjectId.isValid(id)) {
       return res.status(400).json({ error: "Invalid Employee ID" });
     }
+<<<<<<< Updated upstream
   
     try {
       // Find the employee by ID and update their details
@@ -91,6 +99,14 @@ const updateEmployeeDetails = async (req, res) => {
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: "Server error" });
+=======
+
+   
+    const employee = await Employee.findByIdAndUpdate(id, req.body, { new: true });
+
+    if (!employee) {
+      return res.status(404).json({ error: "Employee not found" });
+>>>>>>> Stashed changes
     }
   };
 
@@ -100,5 +116,5 @@ module.exports = {
     getEmployeeDetails,
     deleteEmployee,
     updateEmployeeDetails,
-    // searchEmployees,
+   
 };
