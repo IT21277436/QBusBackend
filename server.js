@@ -5,6 +5,7 @@ const cors = require("cors");
 const userRoutes = require("./routes/user");
 const employeeRoutes = require("./routes/employee");
 const database = require("./db/database");
+const busRoutes = require('./routes/bus')
 
 // express app
 const app = express();
@@ -18,8 +19,9 @@ app.use((req, res, next) => {
 });
 
 // routes
-app.use("/api/user", userRoutes);
-app.use("/api/employee", employeeRoutes);
+app.use('/api/user', userRoutes)
+app.use('/api/employee', employeeRoutes)
+app.use('/api/bus', busRoutes)
 
 // connect to db
 async function initialize() {
