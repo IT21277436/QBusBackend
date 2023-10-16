@@ -107,6 +107,44 @@ const listAllUsers = async (req, res) => {
   res.status(200).json(users);
 };
 
+const getBalance = async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "No data found" });
+  }
+
+  try {
+    const user = await User.findById(id, "balance");
+
+    if (!user) {
+      return res.status(404).json({ error: "No data found" });
+    }
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+const topup = async (req, res) => {
+  const { id } = req.params;
+  const { balance } = req.body;
+
+  try {
+    const user = await User.findOneAndUpdate(
+      { _id: id },
+      { $inc: { balance: balance } },
+      {
+        new: true,
+      }
+    );
+
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
 module.exports = {
   signupUser,
   loginUser,
@@ -114,4 +152,6 @@ module.exports = {
   updateUserdetails,
   deleteUserdetails,
   listAllUsers,
+  topup,
+  getBalance,
 };

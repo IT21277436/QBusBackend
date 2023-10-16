@@ -109,27 +109,6 @@ const updateEmployeeDetails = async (req, res) => {
   }
   };
 
-//   const searchEmployees = async (req, res) => {
-//     try {
-//       // Define the search criteria based on the request body
-//       const searchCriteria = req.body;
-  
-//       // Perform the search using the find method with the search criteria
-//       const employees = await Employee.find(searchCriteria).sort({ createdAt: -1 });
-  
-//       if (!employees || employees.length === 0) {
-//         return res.status(404).json({ error: "No matching employees found" });
-//       }
-  
-//       res.status(200).json(employees);
-//     } catch (error) {
-//       console.error(error);
-//       res.status(500).json({ error: "Server error" });
-//     }
-//   };
-
-  
-
 module.exports = {
     createEmployee,
     getAllEmployees,
