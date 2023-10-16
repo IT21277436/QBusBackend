@@ -48,6 +48,7 @@ const userSchema = new Schema(
       default: 0,
       required: false,
     },
+    tickets: [{ type: mongoose.Schema.Types.ObjectId, ref: "Ticket" }],
   },
   { timestamps: true }
 );
