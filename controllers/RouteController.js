@@ -1,7 +1,6 @@
 const Routes = require("../models/RouteModel");
 const mongoose = require("mongoose");
 
-
 const getAllRoutes = async (req, res) => {
   try {
     const routes = await Routes.find({}).sort({ createdAt: -1 });
@@ -15,7 +14,6 @@ const getAllRoutes = async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 };
-
 
 const getRouteDetails = async (req, res) => {
   try {
@@ -38,7 +36,6 @@ const getRouteDetails = async (req, res) => {
   }
 }
 
-
 const createRoute = async ( req, res) =>{
     const {
         routeNumber,
@@ -47,7 +44,7 @@ const createRoute = async ( req, res) =>{
         totalBusFare,
         schedules,
     } = req.body;
-   
+
     try {
         const route = await Routes.create({
             routeNumber,
@@ -61,7 +58,6 @@ const createRoute = async ( req, res) =>{
         res.status(400).json({ error: error.message });
   }
 };
-
 
 const deleteRoute = async (req, res) =>{
   try {
@@ -93,7 +89,7 @@ const updateRouteDetails = async (req, res) => {
     }
   
     try {
-     
+
       const route = await Routes.findByIdAndUpdate({_id: id}, req.body, { new: true });
   
       if (!route) {

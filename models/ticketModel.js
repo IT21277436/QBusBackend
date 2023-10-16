@@ -10,7 +10,7 @@ const ticketSchema = new Schema(
       default: 0,
     },
     distance: {
-      type: Number,
+      type: String,
       required: true,
     },
     routeNumber: {

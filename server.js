@@ -4,7 +4,11 @@ const express = require("express");
 const cors = require("cors");
 const userRoutes = require("./routes/user");
 const employeeRoutes = require("./routes/employee");
+const routeRoutes = require("./routes/route");
+const scheduleRoutes = require("./routes/schedule");
 const database = require("./db/database");
+const busRoutes = require("./routes/bus");
+const ticketRoutes = require("./routes/ticket");
 
 // express app
 const app = express();
@@ -20,6 +24,10 @@ app.use((req, res, next) => {
 // routes
 app.use("/api/user", userRoutes);
 app.use("/api/employee", employeeRoutes);
+app.use("/api/route", routeRoutes);
+app.use("/api/schedule", scheduleRoutes);
+app.use("/api/bus", busRoutes);
+app.use("/api/ticket", ticketRoutes);
 
 // connect to db
 async function initialize() {
@@ -32,5 +40,4 @@ async function initialize() {
     console.log(error);
   }
 }
-
 initialize();
