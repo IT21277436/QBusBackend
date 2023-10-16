@@ -1,35 +1,52 @@
-// const mongoose = require('mongoose');
-// const chai = require('chai');
-// const expect = chai.expect;
+const chai = require('chai');
+const expect = chai.expect;
+const mongoose = require('mongoose');
 
-// describe('Database Connection', () => {
-//   it('should connect to the database', (done) => {
-//     // Use your MONGO_URI from the environment variables or set it here
-//     const mongoURI = 'mongodb+srv://it21217586:QBus123@qbus.dkzvrvu.mongodb.net/?retryWrites=true&w=majority'; // Replace with your MONGO_URI
+const Database = require('../../db/database');
 
-//     mongoose.connect(mongoURI, {
-//       useNewUrlParser: true,
-//       useCreateIndex: true,
-//       useUnifiedTopology: true,
-//     });
+describe('Database Class', () => {
+  before(async () => {
+  
+  });
 
-//     const db = mongoose.connection;
+  after(async () => {
+    
+    await mongoose.connection.close();
+  });
 
-//     db.on('error', (error) => {
-//       console.error('Database connection error:', error);
-//       done(error);
-//     });
+  it('should create a new instance of Database', () => {
+    const database = new Database();
+    expect(database).to.be.an.instanceOf(Database);
+  });
 
-//     db.once('open', () => {
-//       console.log('Connected to the database');
-//       // You can add more assertions here if needed
-//       expect(db.readyState).to.equal(1); // 1 means connected
-//       done();
-//     });
-//   });
+  it('should have a connect method', () => {
+    const database = new Database();
+    expect(database.connect).to.be.a('function');
+  });
 
-//   after((done) => {
-//     // Close the database connection after all tests
-//     mongoose.connection.close(() => done());
-//   });
-// });
+  it('should connect to the MongoDB database', async () => {
+    const database = new Database();
+    await database.connect();
+    expect(mongoose.connection.readyState).to.equal(1); 
+  });
+
+  it('should not reconnect if there is already a connection', async () => {
+    const database = new Database();
+    await database.connect();
+    await database.connect();
+    expect(mongoose.connection.readyState).to.equal(1); 
+  });
+
+  it('should handle connection errors', async () => {
+    
+    const database = new Database();
+
+    try {
+      
+      database._url = 'invalid-url';
+      await database.connect();
+    } catch (error) {
+      expect(error).to.be.an('error');
+    }
+  });
+});

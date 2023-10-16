@@ -1,7 +1,6 @@
 const Routes = require("../models/RouteModel");
 const mongoose = require("mongoose");
 
-//get all routes
 const getAllRoutes = async (req, res) => {
   try {
     const routes = await Routes.find({}).sort({ createdAt: -1 });
@@ -16,7 +15,6 @@ const getAllRoutes = async (req, res) => {
   }
 };
 
-//get a single route
 const getRouteDetails = async (req, res) => {
   try {
     const { id } = req.params;
@@ -38,7 +36,6 @@ const getRouteDetails = async (req, res) => {
   }
 }
 
-//create new route
 const createRoute = async ( req, res) =>{
     const {
         routeNumber,
@@ -47,7 +44,7 @@ const createRoute = async ( req, res) =>{
         totalBusFare,
         schedules,
     } = req.body;
-    //add emp to db
+
     try {
         const route = await Routes.create({
             routeNumber,
@@ -62,7 +59,6 @@ const createRoute = async ( req, res) =>{
   }
 };
 
-//delete a route
 const deleteRoute = async (req, res) =>{
   try {
     const { id } = req.params;
@@ -84,7 +80,6 @@ const deleteRoute = async (req, res) =>{
     }
 };
 
-// Update route details
 const updateRouteDetails = async (req, res) => {
   try {
     const { id } = req.params;
@@ -94,7 +89,7 @@ const updateRouteDetails = async (req, res) => {
     }
   
     try {
-      // Find the employee by ID and update their details
+
       const route = await Routes.findByIdAndUpdate({_id: id}, req.body, { new: true });
   
       if (!route) {
@@ -111,26 +106,6 @@ const updateRouteDetails = async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
   };
-
-//   const searchEmployees = async (req, res) => {
-//     try {
-//       // Define the search criteria based on the request body
-//       const searchCriteria = req.body;
-  
-//       // Perform the search using the find method with the search criteria
-//       const employees = await Employee.find(searchCriteria).sort({ createdAt: -1 });
-  
-//       if (!employees || employees.length === 0) {
-//         return res.status(404).json({ error: "No matching employees found" });
-//       }
-  
-//       res.status(200).json(employees);
-//     } catch (error) {
-//       console.error(error);
-//       res.status(500).json({ error: "Server error" });
-//     }
-//   };
-
   
 
 module.exports = {

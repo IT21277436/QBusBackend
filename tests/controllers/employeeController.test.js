@@ -5,12 +5,12 @@ const expect = chai.expect;
 
 chai.use(chaiHttp);
 
-describe('HTTP employee Post', function () {
+describe('HTTP Employee Post', function () {
   it('POST', async function () {
-    const serverURL = 'http://localhost:4000'; // Update this with your server URL
+    const serverURL = 'http://localhost:4000'; 
     const requestBody = {
       "employeeId": "E00123",
-      "name": "waseem",
+      "employeeName": "nimal",
       "nic": "200006544326",
       "contactNumber": "0775677890",
       "category": "Driver",
@@ -18,30 +18,33 @@ describe('HTTP employee Post', function () {
     };
 
     const res = await chai.request(serverURL)
-      .post('/api/employee') // Update the correct endpoint path
+<<<<<<< Updated upstream
+      .post('/api/employee')
+=======
+      .post('/api/employee') 
+>>>>>>> Stashed changes
       .send(requestBody)
       .set('Content-Type', 'application/json');
 
     expect(res).to.have.status(200);
   });
-
-
-  describe('HTTP employee Get', function () {
+  describe('HTTP Employee Get', function () {
     it('GET', async function () {
-      const serverURL = 'http://localhost:4000'; // Update with your server URL
+      const serverURL = 'http://localhost:4000'; 
   
       const res = await chai.request(serverURL)
-        .get('/api/employee') // Update with the correct endpoint path
+        .get('/api/employee') 
   
       expect(res).to.have.status(200);
-      // Add more assertions as needed to validate the response data.
+<<<<<<< Updated upstream
+      
     });
   });
 
   
   describe('HTTP employee Post', function () {
     it('POST', async function () {
-      const serverURL = 'http://localhost:4000'; // Update with your server URL
+      const serverURL = 'http://localhost:4000'; 
       const requestBody = {
         "employeeId": "E00123",
         "name": "waseem",
@@ -52,27 +55,36 @@ describe('HTTP employee Post', function () {
       };
   
       const res = await chai.request(serverURL)
-        .post('/api/employee') // Update the correct endpoint path
+        .post('/api/employee') 
         .send(requestBody)
         .set('Content-Type', 'application/json');
   
       expect(res).to.have.status(200);
-      // Add more assertions as needed to validate the response data.
+     
     });
   });
 
   
   describe('HTTP gorest Delete', function () {
     it('DELETE', async function () {
-      const serverURL = 'http://localhost:4000'; // Update with your server URL
-      const employeeIdToDelete = 'E00123'; // Update with the ID of the employee to delete
+      const serverURL = 'http://localhost:4000'; 
+      const employeeIdToDelete = 'E00123'; 
+=======
+   
+    });
+  });
+  describe('HTTP Employee Delete', function () {
+    it('DELETE', async function () {
+      const serverURL = 'http://localhost:4000'; 
+      const employeeIdToDelete = '652d6f53f5541d96aabde524'; 
+>>>>>>> Stashed changes
   
       const res = await chai.request(serverURL)
-        .delete(`/api/employee/${employeeIdToDelete}`) // Update the correct endpoint path
+        .delete(`/api/employee/${employeeIdToDelete}`) 
         .set('Content-Type', 'application/json');
   
       expect(res).to.have.status(200);
-      // Add more assertions as needed to validate the response data.
+      
     });
   });
   

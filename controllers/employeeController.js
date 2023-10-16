@@ -1,8 +1,6 @@
 const Employee = require("../models/employeeModel");
 const mongoose = require("mongoose");
 
-//get all Employees
-// Using Async/Await for Improved Readability
 const getAllEmployees = async (req, res) => {
   try {
     const employees = await Employee.find({}).sort({ createdAt: -1 });
@@ -17,7 +15,6 @@ const getAllEmployees = async (req, res) => {
   }
 };
 
-//get a single employee
 const getEmployeeDetails = async (req, res) => {
   try {
     const { id } = req.params;
@@ -39,7 +36,7 @@ const getEmployeeDetails = async (req, res) => {
   }
 }
 
-//create new employee
+
 const createEmployee = async ( req, res) =>{
     const {
         employeeId,
@@ -49,7 +46,6 @@ const createEmployee = async ( req, res) =>{
         category,
         region,
     } = req.body;
-    //add emp to db
 
     try {
         const employee = await Employee.create({
@@ -66,7 +62,7 @@ const createEmployee = async ( req, res) =>{
   }
 };
 
-//delete a Employee
+
 const deleteEmployee = async (req, res) =>{
   try {
     const { id } = req.params;
@@ -96,11 +92,25 @@ const updateEmployeeDetails = async (req, res) => {
       return res.status(400).json({ error: "Invalid Employee ID" });
     }
 
-    // Find the employee by ID and update their details
+  
+    try {
+      // Find the employee by ID and update their details
+      const employee = await Employee.findByIdAndUpdate({_id: id}, req.body, { new: true });
+  
+      if (!employee) {
+        return res.status(404).json({ error: "Employee not found" });
+      }
+  
+      res.status(200).json(employee);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Server error" });
+
     const employee = await Employee.findByIdAndUpdate(id, req.body, { new: true });
 
     if (!employee) {
       return res.status(404).json({ error: "Employee not found" });
+
     }
     res.status(200).json(employee);
   } catch (error) {
@@ -115,5 +125,5 @@ module.exports = {
     getEmployeeDetails,
     deleteEmployee,
     updateEmployeeDetails,
-    // searchEmployees,
+   
 };

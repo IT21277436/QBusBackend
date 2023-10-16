@@ -6,14 +6,14 @@ const createToken = (id) => {
   return jwt.sign({ id }, process.env.SECRET, { expiresIn: "3d" });
 };
 
-// login user
+
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
   try {
     const user = await User.login(email, password);
 
-    // create a token
+    
     const token = createToken(user._id);
     const id = user._id;
     const isRegistered = user.isRegistered;
@@ -24,14 +24,14 @@ const loginUser = async (req, res) => {
   }
 };
 
-// signup user
+
 const signupUser = async (req, res) => {
   const { email, password, confirmpassword, mobile } = req.body;
 
   try {
     const user = await User.signup(email, password, confirmpassword, mobile);
 
-    // create a token
+   
     const token = createToken(user._id);
     const id = user._id;
 
@@ -41,7 +41,7 @@ const signupUser = async (req, res) => {
   }
 };
 
-// get user details
+
 const getUserdetails = async (req, res) => {
   const { id } = req.params;
 
@@ -96,7 +96,7 @@ const deleteUserdetails = async (req, res) => {
   res.status(200).json(user);
 };
 
-// get all users
+
 const listAllUsers = async (req, res) => {
   const users = await User.find({}).sort({ createdAt: -1 });
 
