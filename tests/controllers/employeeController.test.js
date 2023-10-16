@@ -7,7 +7,7 @@ chai.use(chaiHttp);
 
 describe('HTTP employee Post', function () {
   it('POST', async function () {
-    const serverURL = 'http://localhost:4000'; // Update this with your server URL
+    const serverURL = 'http://localhost:4000'; 
     const requestBody = {
       "employeeId": "E00123",
       "name": "waseem",
@@ -18,7 +18,7 @@ describe('HTTP employee Post', function () {
     };
 
     const res = await chai.request(serverURL)
-      .post('/api/employee') // Update the correct endpoint path
+      .post('/api/employee')
       .send(requestBody)
       .set('Content-Type', 'application/json');
 
@@ -28,20 +28,20 @@ describe('HTTP employee Post', function () {
 
   describe('HTTP employee Get', function () {
     it('GET', async function () {
-      const serverURL = 'http://localhost:4000'; // Update with your server URL
+      const serverURL = 'http://localhost:4000'; 
   
       const res = await chai.request(serverURL)
-        .get('/api/employee') // Update with the correct endpoint path
+        .get('/api/employee') 
   
       expect(res).to.have.status(200);
-      // Add more assertions as needed to validate the response data.
+      
     });
   });
 
   
   describe('HTTP employee Post', function () {
     it('POST', async function () {
-      const serverURL = 'http://localhost:4000'; // Update with your server URL
+      const serverURL = 'http://localhost:4000'; 
       const requestBody = {
         "employeeId": "E00123",
         "name": "waseem",
@@ -52,27 +52,27 @@ describe('HTTP employee Post', function () {
       };
   
       const res = await chai.request(serverURL)
-        .post('/api/employee') // Update the correct endpoint path
+        .post('/api/employee') 
         .send(requestBody)
         .set('Content-Type', 'application/json');
   
       expect(res).to.have.status(200);
-      // Add more assertions as needed to validate the response data.
+     
     });
   });
 
   
   describe('HTTP gorest Delete', function () {
     it('DELETE', async function () {
-      const serverURL = 'http://localhost:4000'; // Update with your server URL
-      const employeeIdToDelete = 'E00123'; // Update with the ID of the employee to delete
+      const serverURL = 'http://localhost:4000'; 
+      const employeeIdToDelete = 'E00123'; 
   
       const res = await chai.request(serverURL)
-        .delete(`/api/employee/${employeeIdToDelete}`) // Update the correct endpoint path
+        .delete(`/api/employee/${employeeIdToDelete}`) 
         .set('Content-Type', 'application/json');
   
       expect(res).to.have.status(200);
-      // Add more assertions as needed to validate the response data.
+      
     });
   });
   

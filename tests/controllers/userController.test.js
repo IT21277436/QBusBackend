@@ -1,14 +1,14 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const mongoose = require('mongoose');
-const app = require('../../server'); // Replace with the path to your Express app
-const User = require('../../models/userModel'); // Import your User model
+const app = require('../../server'); 
+const User = require('../../models/userModel'); 
 const expect = chai.expect;
 
 chai.use(chaiHttp);
 
 describe('User Controller', () => {
-  // Connect to the test database before running any tests
+ 
   before((done) => {
     mongoose.connect('mongodb://localhost/test', {
       useNewUrlParser: true,
@@ -18,12 +18,11 @@ describe('User Controller', () => {
     mongoose.connection.once('open', () => done());
   });
 
-  // Disconnect from the test database after all tests have run
   after((done) => {
     mongoose.connection.close(() => done());
   });
 
-  // Clear the User collection in the test database before each test
+  
   beforeEach(async () => {
     await User.deleteMany({});
   });
@@ -79,7 +78,7 @@ describe('User Controller', () => {
         password: 'testpassword',
       };
 
-      // Create a user in the database
+    
       await User.create(user);
 
       const res = await chai.request(app).post('/api/login').send(user);
@@ -115,5 +114,5 @@ describe('User Controller', () => {
     });
   });
 
-  // Add more test cases for profile management and admin actions here
+  
 });
