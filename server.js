@@ -2,8 +2,10 @@ require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
-const userRoutes = require("./routes/user");
-const employeeRoutes = require("./routes/employee");
+const userRoutes = require('./routes/user')
+const employeeRoutes = require('./routes/employee')
+const routeRoutes = require('./routes/route')
+const scheduleRoutes = require('./routes/schedule')
 const database = require("./db/database");
 const busRoutes = require('./routes/bus')
 
@@ -21,6 +23,8 @@ app.use((req, res, next) => {
 // routes
 app.use('/api/user', userRoutes)
 app.use('/api/employee', employeeRoutes)
+app.use('/api/route', routeRoutes)
+app.use('/api/schedule', scheduleRoutes)
 app.use('/api/bus', busRoutes)
 
 // connect to db
@@ -34,5 +38,4 @@ async function initialize() {
     console.log(error);
   }
 }
-
 initialize();
