@@ -43,6 +43,12 @@ const userSchema = new Schema(
       default: null,
       required: false,
     },
+    balance: {
+      type: Number,
+      default: 0,
+      required: false,
+    },
+    tickets: [{ type: mongoose.Schema.Types.ObjectId, ref: "Ticket" }],
   },
   { timestamps: true }
 );
