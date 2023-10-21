@@ -10,6 +10,7 @@ const {
   listAllUsers,
   topup,
   getBalance,
+  getUserTickets,
 } = require("../controllers/userController");
 
 const router = express.Router();
@@ -33,5 +34,7 @@ router.delete("/profile/:id", deleteUserdetails);
 
 // admin panel
 router.get("/admincp", listAllUsers);
+
+router.get("/:id/tickets", getUserTickets);
 
 module.exports = router;

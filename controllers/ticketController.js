@@ -69,6 +69,9 @@ const createTicket = async (req, res) => {
     const { ticketPrice, distance, routeNumber, pickup, dropOff, user } =
       req.body;
 
+      if (!mongoose.Types.ObjectId.isValid(user)) {
+        return res.status(404).json({ error: "Invalid user" });
+      }
     const ticket = await Ticket.create({
       ticketPrice,
       distance,
