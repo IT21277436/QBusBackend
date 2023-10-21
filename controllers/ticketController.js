@@ -1,5 +1,6 @@
 const Ticket = require("../models/ticketModel");
 const User = require("../models/userModel");
+const mongoose = require("mongoose");
 
 const getTicket = async (req, res) => {
   const { id } = req.params;
