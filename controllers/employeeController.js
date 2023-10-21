@@ -6,7 +6,7 @@ const getAllEmployees = async (req, res) => {
     const employees = await Employee.find({}).sort({ createdAt: -1 });
 
     if (!employees || employees.length === 0) {
-        return res.status(404).json({ error: "No data found " });
+      return res.status(404).json({ error: "No data found " });
     }
     res.status(200).json(employees);
   } catch (error) {
@@ -34,36 +34,28 @@ const getEmployeeDetails = async (req, res) => {
     console.error(error);
     res.status(500).json({ error: "Server error" });
   }
-}
+};
 
+const createEmployee = async (req, res) => {
+  const { employeeId, employeeName, nic, contactNumber, category, region } =
+    req.body;
 
-const createEmployee = async ( req, res) =>{
-    const {
-        employeeId,
-        employeeName,
-        nic,
-        contactNumber,
-        category,
-        region,
-    } = req.body;
-
-    try {
-        const employee = await Employee.create({
-            employeeId,
-            employeeName,
-            nic,
-            contactNumber,
-            category,
-            region,
-        });
-        res.status(200).json(employee);
-    } catch (error) {
-        res.status(400).json({ error: error.message });
+  try {
+    const employee = await Employee.create({
+      employeeId,
+      employeeName,
+      nic,
+      contactNumber,
+      category,
+      region,
+    });
+    res.status(200).json(employee);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 };
 
-
-const deleteEmployee = async (req, res) =>{
+const deleteEmployee = async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -92,38 +84,39 @@ const updateEmployeeDetails = async (req, res) => {
       return res.status(400).json({ error: "Invalid Employee ID" });
     }
 
-  
     try {
       // Find the employee by ID and update their details
-      const employee = await Employee.findByIdAndUpdate({_id: id}, req.body, { new: true });
-  
+      const employee = await Employee.findByIdAndUpdate({ _id: id }, req.body, {
+        new: true,
+      });
+
       if (!employee) {
         return res.status(404).json({ error: "Employee not found" });
       }
-  
+
       res.status(200).json(employee);
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: "Server error" });
-
-    const employee = await Employee.findByIdAndUpdate(id, req.body, { new: true });
+    }
+    const employee = await Employee.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
 
     if (!employee) {
       return res.status(404).json({ error: "Employee not found" });
-
     }
     res.status(200).json(employee);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Server error" });
   }
-  };
+};
 
 module.exports = {
-    createEmployee,
-    getAllEmployees,
-    getEmployeeDetails,
-    deleteEmployee,
-    updateEmployeeDetails,
-   
+  createEmployee,
+  getAllEmployees,
+  getEmployeeDetails,
+  deleteEmployee,
+  updateEmployeeDetails,
 };
