@@ -96,6 +96,26 @@ const deleteUserdetails = async (req, res) => {
   res.status(200).json(user);
 };
 
+const getUserTickets = async (req, res) => {
+  const userId = req.params.id; // You can obtain the user's ID from the request parameters
+
+  try {
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return res.status(404).json({ error: "No such user" });
+    }
+    // Find the user by their ID and populate the 'tickets' field to retrieve the associated tickets
+    const userTickets = await User.findById(userId).populate('tickets');
+
+    if (!userTickets) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.status(200).json(userTickets.tickets);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
 
 const listAllUsers = async (req, res) => {
   const users = await User.find({}).sort({ createdAt: -1 });
@@ -154,4 +174,5 @@ module.exports = {
   listAllUsers,
   topup,
   getBalance,
+  getUserTickets
 };

@@ -1,5 +1,6 @@
 const Ticket = require("../models/ticketModel");
 const User = require("../models/userModel");
+const mongoose = require("mongoose");
 
 const getTicket = async (req, res) => {
   const { id } = req.params;
@@ -69,9 +70,8 @@ const createTicket = async (req, res) => {
       req.body;
 
     if (!mongoose.Types.ObjectId.isValid(user)) {
-      return res.status(400).json({ error: "Invalid User ID" });
+      return res.status(404).json({ error: "Invalid user" });
     }
-
     const ticket = await Ticket.create({
       ticketPrice,
       distance,
