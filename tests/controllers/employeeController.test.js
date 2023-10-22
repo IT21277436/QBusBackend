@@ -18,9 +18,7 @@ describe('HTTP Employee Post', function () {
     };
 
     const res = await chai.request(serverURL)
-
       .post('/api/employee')
-
       .send(requestBody)
       .set('Content-Type', 'application/json');
 
@@ -35,15 +33,14 @@ describe('HTTP Employee Post', function () {
         .get('/api/employee') 
   
       expect(res).to.have.status(200);
-      
     });
   });
 
-  describe('HTTP gorest Delete', function () {
+  describe('HTTP Employee Delete', function () {
     it('DELETE', async function () {
       const serverURL = 'http://localhost:4000'; 
-      const employeeIdToDelete = 'E00123'; 
-  
+      const employeeIdToDelete = '652d6f53f5541d96aabde524'; 
+
       const res = await chai.request(serverURL)
         .delete(`/api/employee/${employeeIdToDelete}`) 
         .set('Content-Type', 'application/json');

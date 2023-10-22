@@ -1,49 +1,48 @@
+
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const expect = chai.expect;
 
 chai.use(chaiHttp);
 
-describe('HTTP Bus Post', function () {
+describe('HTTP ContactUs Post', function () {
   it('POST', async function () {
     const serverURL = 'http://localhost:4000'; 
     const requestBody = {
-      "busId": "B00123",
-      "licenseNo": "C00098765",
-      "model": "HONDA",
-      "make": "FORD",
-      "driverId": "D0098",
-      "inspectorId": "I00876"
+      "email": "23@gmailcom",
+      "subject": "Colombo-Ampara",
+      "message": "90 Km",
     };
 
     const res = await chai.request(serverURL)
-      .post('/api/bus') 
+      .post('/api/contactUs') 
       .send(requestBody)
       .set('Content-Type', 'application/json');
 
     expect(res).to.have.status(200);
   });
-  describe('HTTP Bus Get', function () {
+  describe('HTTP ContactUs Get', function () {
     it('GET', async function () {
       const serverURL = 'http://localhost:4000'; 
   
       const res = await chai.request(serverURL)
-        .get('/api/bus') 
+        .get('/api/contactUs') 
   
       expect(res).to.have.status(200);
      
     });
   });
-  describe('HTTP Bus Delete', function () {
+  describe('HTTP ContactUs Delete', function () {
     it('DELETE', async function () {
       const serverURL = 'http://localhost:4000'; 
-      const busIdToDelete = '653564174f40dbf0e5d7d4f6'; 
+      const contactUsIdToDelete = '65352d659693d2f7663b9396'; 
   
       const res = await chai.request(serverURL)
-        .delete(`/api/bus/${busIdToDelete}`) 
+        .delete(`/api/contactUs/${contactUsIdToDelete}`) 
         .set('Content-Type', 'application/json');
   
       expect(res).to.have.status(200);
+      
     });
   });
   
