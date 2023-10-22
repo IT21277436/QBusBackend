@@ -38,7 +38,7 @@ describe('HTTP Schedule Post', function () {
   describe('HTTP Schedule Delete', function () {
     it('DELETE', async function () {
       const serverURL = 'http://localhost:4000'; 
-      const scheduleIdToDelete = '652d5ef99397aae44417e117'; 
+      const scheduleIdToDelete = '653564194f40dbf0e5d7d500'; 
   
       const res = await chai.request(serverURL)
         .delete(`/api/schedule/${scheduleIdToDelete}`) 

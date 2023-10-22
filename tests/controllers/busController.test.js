@@ -37,7 +37,7 @@ describe('HTTP Bus Post', function () {
   describe('HTTP Bus Delete', function () {
     it('DELETE', async function () {
       const serverURL = 'http://localhost:4000'; 
-      const busIdToDelete = '652d63e9b8a307c39d3dddab'; 
+      const busIdToDelete = '653564174f40dbf0e5d7d4f6'; 
   
       const res = await chai.request(serverURL)
         .delete(`/api/bus/${busIdToDelete}`) 
