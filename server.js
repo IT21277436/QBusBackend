@@ -10,6 +10,7 @@ const database = require("./db/database");
 const busRoutes = require("./routes/bus");
 const ticketRoutes = require("./routes/ticket");
 const contactUsRoutes = require("./routes/contactUs")
+const paymentRoutes = require("./routes/payment");
 
 // express app
 const app = express();
@@ -30,6 +31,7 @@ app.use("/api/schedule", scheduleRoutes);
 app.use("/api/bus", busRoutes);
 app.use("/api/ticket", ticketRoutes);
 app.use("/api/contactUs", contactUsRoutes)
+app.use("/api/payment", paymentRoutes);
 
 // connect to db
 async function initialize() {
