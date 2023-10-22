@@ -24,6 +24,7 @@ describe('HTTP Employee Post', function () {
 
     expect(res).to.have.status(200);
   });
+
   describe('HTTP Employee Get', function () {
     it('GET', async function () {
       const serverURL = 'http://localhost:4000'; 
@@ -32,8 +33,6 @@ describe('HTTP Employee Post', function () {
         .get('/api/employee') 
   
       expect(res).to.have.status(200);
-
-      
     });
   });
 

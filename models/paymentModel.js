@@ -2,26 +2,30 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const RoutesSchema = new Schema(
+const paymentSchema = new Schema(
   {
-    routeNumber: {
+    payType: {
       type: String,
       required: true,
     },
-    routeName: {
+    cardNo: {
       type: String,
       required: true,
     },
-    distance: {
+    expMonth: {
       type: String,
-      required: true,
+      default: true,
     },
-    totalBusFare: {
-      type: Number,
+    expYear: {
+      type: String,
       default: null,
+    },
+    cvv: {
+      type: String,
+      required: true,
     },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Routes", RoutesSchema);
+module.exports = mongoose.model("Payment", paymentSchema);
